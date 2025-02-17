@@ -1,0 +1,37 @@
+def calculate_deductions(total_bill, d_v_deduction):
+    sd = round(total_bill * 0.10)
+    it = round(total_bill * 0.02)
+    gst = round(total_bill * 0.02)
+    lc = round(total_bill * 0.01)
+    cheque = round(total_bill - sd - it - gst - lc - d_v_deduction)
+
+    deductions = {
+        "SD": sd,
+        "IT": it,
+        "GST": gst,
+        "LC": lc,
+        "D-V": d_v_deduction,
+        "CHEQUE": cheque,
+        "TOTAL": total_bill
+    }
+    return deductions
+
+
+# Get input from the user
+try:
+    total_bill_amount = int(input("Enter the total bill amount: "))
+    d_v_deduction_amount = int(input("Enter the D-V deduction amount: "))
+
+    if total_bill_amount < 0 or d_v_deduction_amount < 0:
+        raise ValueError("Bill amount and deduction cannot be negative.")
+
+    deductions_table = calculate_deductions(total_bill_amount, d_v_deduction_amount)
+
+    print("\nDeduction Summary:")  # Added a newline for better formatting
+    for key, value in deductions_table.items():
+        print(f"{key}\t{value}")
+
+except ValueError as e:
+    print(f"Invalid input: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
